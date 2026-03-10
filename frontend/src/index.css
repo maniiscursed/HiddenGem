@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #fcf3f8;
+  --color-brand-100: #fae4f0;
+  --color-brand-200: #f6cae2;
+  --color-brand-300: #f0a2cc;
+  --color-brand-400: #e66baf;
+  --color-brand-500: #da4293;
+  --color-brand-600: #c52473;
+  --color-brand-700: #a7195b;
+  --color-brand-800: #8b164c;
+  --color-brand-900: #741742;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-slate-50, #f8fafc);
+    color: var(--color-slate-900, #0f172a);
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
