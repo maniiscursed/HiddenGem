@@ -19,14 +19,14 @@ export default function AuthTabs({ onClose, onLoginSuccess }) {
                 formData.append('username', form.username);
                 formData.append('password', form.password);
 
-                const res = await axios.post('http://localhost:8000/api/auth/login', formData, {
+                const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/auth/login`, formData, {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 });
 
                 toast.success('Successfully logged in!');
                 onLoginSuccess(res.data);
             } else {
-                const res = await axios.post('http://localhost:8000/api/auth/register', {
+                const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/auth/register`, {
                     username: form.username,
                     email: form.email,
                     password: form.password

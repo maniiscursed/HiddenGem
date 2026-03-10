@@ -21,7 +21,7 @@ const getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) => {
   return R * c; // Distance in km
 }
 
-const API = 'http://localhost:8000'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 const ALL_CATEGORIES = ['All', 'Food', 'Services', 'Retail', 'Health', 'Education', 'Entertainment', 'Other']
 
 // Add Axios interceptor for JWT

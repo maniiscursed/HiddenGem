@@ -45,8 +45,8 @@ export default function BusinessDetailModal({ business, onClose, currentUser, on
         setLoadingReviews(true);
         setLoadingVibe(true);
 
-        const fetchReviews = axios.get(`http://localhost:8000/api/businesses/${business.id}/reviews`);
-        const fetchVibe = axios.get(`http://localhost:8000/api/businesses/${business.id}/vibe`);
+        const fetchReviews = axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/businesses/${business.id}/reviews`);
+        const fetchVibe = axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/businesses/${business.id}/vibe`);
 
         Promise.all([fetchReviews, fetchVibe])
             .then(([reviewsRes, vibeRes]) => {
@@ -75,7 +75,7 @@ export default function BusinessDetailModal({ business, onClose, currentUser, on
         try {
             const payload = { ...reviewForm, author: currentUser.username };
             const res = await axios.post(
-                `http://localhost:8000/api/businesses/${business.id}/reviews`,
+                `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/businesses/${business.id}/reviews`,
                 payload
             );
             setReviews(prev => [...prev, res.data]);

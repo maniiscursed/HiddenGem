@@ -175,7 +175,7 @@ export default function AddBusinessWizard({ onSuccess }) {
 
         try {
             // Need to make sure token is sent, axios interceptor should handle it if set globally
-            const res = await axios.post('http://localhost:8000/api/upload', formData, {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/upload`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             setForm(p => ({ ...p, imageUrl: res.data.imageUrl }));
@@ -192,7 +192,7 @@ export default function AddBusinessWizard({ onSuccess }) {
         setError('');
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:8000/api/businesses', {
+            await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/businesses`, {
                 name: form.name,
                 category: form.category,
                 description: form.description,

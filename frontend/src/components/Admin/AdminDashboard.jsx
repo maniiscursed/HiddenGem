@@ -16,8 +16,8 @@ export default function AdminDashboard({ onBack }) {
         try {
             const token = localStorage.getItem('token');
             const [bizRes, statsRes] = await Promise.all([
-                axios.get('http://localhost:8000/api/businesses'),
-                axios.get('http://localhost:8000/api/admin/stats', {
+                axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/businesses`),
+                axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/admin/stats`, {
                     headers: { Authorization: `Bearer ${token}` }
                 })
             ]);
@@ -39,7 +39,7 @@ export default function AdminDashboard({ onBack }) {
 
         try {
             const token = localStorage.getItem('token');
-            await axios.delete(`http://localhost:8000/api/businesses/${id}`, {
+            await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/businesses/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.success(`Deleted business: ${name}`);
@@ -59,7 +59,7 @@ export default function AdminDashboard({ onBack }) {
         if (!bizReviews[bizId]) {
             setLoadingReviews(true);
             try {
-                const res = await axios.get(`http://localhost:8000/api/businesses/${bizId}/reviews`);
+                const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/businesses/${bizId}/reviews`);
                 setBizReviews(prev => ({ ...prev, [bizId]: res.data }));
             } catch (err) {
                 toast.error('Failed to load reviews');
@@ -73,7 +73,7 @@ export default function AdminDashboard({ onBack }) {
         if (!window.confirm('Delete this review permanently?')) return;
         try {
             const token = localStorage.getItem('token');
-            await axios.delete(`http://localhost:8000/api/reviews/${reviewId}`, {
+            await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/reviews/${reviewId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.success('Review deleted');

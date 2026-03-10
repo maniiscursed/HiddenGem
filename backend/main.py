@@ -25,10 +25,9 @@ os.makedirs("uploads", exist_ok=True)
 # Serve the 'uploads' directory statically
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
-# Configure CORS for the frontend React application
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Vite default port
+    allow_origins=["*"],  # Allow all origins for production (or configure Render URL specifically)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
